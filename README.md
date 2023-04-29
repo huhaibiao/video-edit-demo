@@ -9,6 +9,10 @@
 - ui框架具备 elementPlus和elementUI按需导入
 - 简版的视频编辑器
 
+# 项目运行
+1. ```pnpm i```
+2. ``` pnpm dev ```
+3. ``` pnpm build ``
 
 # 视频截图方案有两种： 
 1. video + canvas
@@ -92,6 +96,7 @@ link.click();
 - 解决视频小于20秒的情况下分帧: tick刻度生成/视频帧生成/ ✅
 - 视频帧随视频切换动态更新 ✅
 - 上传视频至服务器(模拟) ✅
+- 配置部署 ✅
 
 # ffmpeg命令：
 
