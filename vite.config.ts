@@ -1,5 +1,5 @@
 /*
- * @Author: huhaibiao huhaibiao@do-global.com
+ * @Author: huhaibiao
  * @Date: 2023-04-21 22:11:20
  */
 import path from 'path'
@@ -17,7 +17,13 @@ export default defineConfig(async ({ command, mode }) => {
   return {
     base: './',
     server: {
-      open: true
+      open: true,
+      host: '0.0.0.0',
+      headers: {
+        'Cross-Origin-Opener-Policy': 'same-origin',
+        'Cross-Origin-Embedder-Policy': 'require-corp'
+      },
+      proxy: {}
     },
     resolve: {
       alias: {

@@ -1,30 +1,49 @@
 /*
- * @Author: huhaibiao huhaibiao@do-global.com
+ * @Author: huhaibiao
  * @Date: 2023-04-21 23:55:53
  */
-import { defineStore } from 'pinia'
 
-// export const useCounterStore = defineStore('counter', {
-//   state: () => {
-//     return { count: 0 }
-//   },
-//   // 也可以这样定义
-//   // state: () => ({ count: 0 })
-//   actions: {
-//     increment() {
-//       this.count++
-//     }
-//   }
-// })
+export let store = {
+  id: 0
+}
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const increment = () => {
-    count.value++
+export const processData = ref(0)
+
+export type vT = {
+  duration?: number
+  currentSecond?: number
+  tickCounts?: number
+  playStatus?: Boolean
+  id?: number
+  fileName?: string
+  videoInfo?: string
+  url?: string
+  videoUrl?: string
+  coverUrl?: string
+  frameList?: any[] //视频帧
+}
+/**视频列表 */
+export const videoList = reactive<[vT]>([
+  {
+    videoUrl: '',
+    coverUrl: ''
   }
+])
+videoList.pop()
+/**当前选中的视频下标 */
+export const videoSelected = ref(0)
 
-  return {
-    count,
-    increment
-  }
+/**字体列表 */
+export const fontList = reactive<any[]>([])
+
+/** 贴图列表  {url}*/
+export const imageList = reactive<any[]>([])
+
+/** 字幕文件列表 */
+export const subtitleList = reactive<any[]>([])
+
+/**多少个刻度 */
+export const tickCounts = computed(() => {
+  const videoInfo = videoList[videoSelected.value] || {}
+  return videoInfo.duration! >= 20 ? 20 : Math.floor(videoInfo.duration!)
 })
