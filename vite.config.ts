@@ -10,12 +10,19 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
+import viteCompression from 'vite-plugin-compression'
+// import terser from '@rollup/plugin-terser'
 // https://vitejs.dev/config/
 
 const pathSrc = path.resolve(__dirname, 'src')
 export default defineConfig(async ({ command, mode }) => {
   return {
     base: './',
+    build: {
+      rollupOptions: {
+        // plugins: [terser()]
+      }
+    },
     server: {
       open: true,
       host: '0.0.0.0',
@@ -55,6 +62,10 @@ export default defineConfig(async ({ command, mode }) => {
       Icons({
         compiler: 'vue3',
         autoInstall: true
+      }),
+      // terser()
+      viteCompression({
+        threshold: 1000 * 100 // 对大于 100kb 的文件进行压缩
       })
     ],
     define: {

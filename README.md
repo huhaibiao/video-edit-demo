@@ -10,9 +10,12 @@
 - 简版的视频编辑器
 
 # 项目运行
-1. ```pnpm i```
-2. ``` pnpm dev ```
-3. ``` pnpm build ``
+1. ```pnpm i``` 安装依赖
+2. ``` pnpm dev ``` 本地运行
+3. ``` pnpm build ``` 项目打包
+
+# 项目demo地址：
+`https://video-edit-demo.vercel.app/#/`
 
 # 视频截图方案有两种： 
 1. video + canvas
@@ -26,14 +29,10 @@
 
 
 # 原理
-c/c++视频处理算法库：ffmpeg
-        ｜
-        ｜
-        \/
-webassermbly,可在浏览器中运行
-        ｜
-        ｜
-        \/
+c/c++视频处理算法库：ffmpeg ->
+
+webassermbly,可在浏览器中运行 ->
+       
 使用@ffmpeg/ffmpeg @ffmpeg/core这个js库，去对用户上传的视频进行处理
 
 
