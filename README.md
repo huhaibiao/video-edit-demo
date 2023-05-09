@@ -1,8 +1,11 @@
 <!--
- * @Author: huhaibiao huhaibiao@do-global.com
+ * @Author: huhaibiao
  * @Date: 2023-04-21 22:11:20
 -->
 
+# 分支说明：
+- master:为正式分支，master会不定期合并dev分支
+- dev: 为开发分支，如果需要提交，请提交到该分支
 
 # 这个demo框架
 - 初步具备：vite 、vue3 、 ts、vue-router 、pinia
