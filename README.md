@@ -12,7 +12,7 @@
 # 项目运行
 1. ```pnpm i```
 2. ``` pnpm dev ```
-3. ``` pnpm build ``
+3. ``` pnpm build ```
 
 # 视频截图方案有两种： 
 1. video + canvas
