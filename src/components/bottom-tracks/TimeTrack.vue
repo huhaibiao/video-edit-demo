@@ -22,16 +22,19 @@ function updateScrubber() {
   const time = video.currentTime
   videoList[videoSelected.value].currentSecond = Math.floor(video.currentTime)
   const duration = video.duration
-  let position = (time / duration) * timeline.offsetWidth
+  let position = (time / duration) * 100
   if (time === 0) {
     position = 0
   }
-  scrubberLeft.value = `${position}px`
+  scrubberLeft.value = `${position.toFixed(2)}%`
 }
 
-// Update video time based on scrubber position
+// 鼠标点击底部区域更新视频时间
 function updateVideoTime(event: MouseEvent) {
-  const position = event.clientX - timeline.offsetLeft
+  var targetRect = timeline.getBoundingClientRect()
+  var targetX = targetRect.left
+  const position = event.clientX - targetX - 2
+
   const duration = video.duration
   const time = (position / timeline.offsetWidth) * duration
   video.currentTime = time
@@ -41,27 +44,33 @@ function updateVideoTime(event: MouseEvent) {
 
 const props = defineProps(['duration'])
 const ticks = ref<any[]>([])
+const loading = ref(false)
 watch(
   () => props.duration,
   (newDuration: number) => {
-    let hasHours = false
-    if (Math.floor(newDuration / 3600) > 0) {
-      hasHours = true
-    }
-    const tmp = interval(newDuration)
-    ticks.value = tmp.map((item, index) => {
-      const y = (index / tmp.length) * 100
-      return {
-        left: `${y.toFixed(0)}%`,
-        tickTime: formatTime(item, hasHours)
+    if (!newDuration) return
+    loading.value = true
+    setTimeout(() => {
+      let hasHours = false
+      if (Math.floor(newDuration / 3600) > 0) {
+        hasHours = true
       }
+      const tmp = interval(newDuration)
+      ticks.value = tmp.map((item, index) => {
+        const y = (index / (tmp.length - 1)) * 100
+        return {
+          left: `${y.toFixed(2)}%`,
+          tickTime: formatTime(item, hasHours)
+        }
+      })
+      loading.value = false
     })
   }
 )
 </script>
 
 <template>
-  <div id="timeline">
+  <div id="timeline" v-loading="loading">
     <div class="scrubber" :style="{ left: scrubberLeft }"></div>
     <div
       class="tick"
@@ -69,7 +78,7 @@ watch(
       :key="index"
       :style="{ left: item.left }"
     >
-      {{ item.tickTime }}
+      {{ loading ? '' : item.tickTime }}
     </div>
   </div>
 </template>
@@ -92,6 +101,7 @@ watch(
   width: 2px;
   height: 100%;
   background-color: #409eff;
+  transition: left 0.2s linear;
 }
 #timeline .tick {
   position: absolute;
@@ -104,7 +114,7 @@ watch(
   content: '|';
   position: relative;
   top: -10px;
-  left: -100%;
+  left: calc(-100% + 2px);
   width: 1px;
   height: 4px;
   font-size: 12px;

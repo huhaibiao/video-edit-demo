@@ -1,3 +1,4 @@
+import { ffmpegCoreLoaded } from './../store/index'
 /*
  * @Author: huhaibiao
  * @Date: 2023-04-23 15:10:05
@@ -8,11 +9,13 @@ import { processData, tickCounts } from '../store'
 // const { fetchFile, createFFmpeg } = FFmpeg
 
 const ffmpeg = createFFmpeg({
-  corePath: '/plugin/ffmpeg-core.js'
+  corePath: '/plugin/ffmpeg-core.js',
+  log: true
 })
 ffmpeg.load()
 ffmpeg.setProgress(progress => {
   processData.value = progress.ratio
+  console.log('🚀 ~ file: useFfmpeg.ts:16 ~ progress.ratio:', progress.ratio)
 })
 
 const videoInfo = {
@@ -20,6 +23,9 @@ const videoInfo = {
   bitRate: ''
 }
 ffmpeg.setLogger(logs => {
+  if (logs.type === 'info' && logs.message.includes('ffmpeg-core loaded')) {
+    ffmpegCoreLoaded.value = true
+  }
   if (logs.message.includes('Duration')) {
     videoInfo.duration = logs.message.slice(
       logs.message.indexOf('Duration:') + 'Duration: '.length,

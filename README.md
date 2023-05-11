@@ -12,6 +12,9 @@
 - ui框架具备 elementPlus和elementUI按需导入
 - 简版的视频编辑器
 
+# 界面
+![编辑器界面](./docs/images/images1.png)
+
 # 项目运行
 1. ```pnpm i``` 安装依赖
 2. ``` pnpm dev ``` 本地运行
@@ -82,7 +85,7 @@ link.click();
 ```
 
 
-# need to do
+# done
 - 开启worker多线程，处理视频
 - 视频分割，一分为2，剪切视频 ✅
 - 视频每秒分帧 ✅
@@ -99,6 +102,10 @@ link.click();
 - 视频帧随视频切换动态更新 ✅
 - 上传视频至服务器(模拟) ✅
 - 配置部署 ✅
+- 加载ffmpeg-core状态添加 ✅
+- 视频时间刻度点击对其bug修复 ✅
+- 超过2G视频兼容不处理 ✅
+- 右侧按钮优化 ✅
 
 # ffmpeg命令：
 

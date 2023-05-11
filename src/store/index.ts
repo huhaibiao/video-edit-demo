@@ -7,6 +7,8 @@ export let store = {
   id: 0
 }
 
+export const ffmpegCoreLoaded = ref(false)
+
 export const processData = ref(0)
 
 export type vT = {

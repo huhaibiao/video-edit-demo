@@ -23,6 +23,6 @@ const addTextClick = async () => {
 
 <template>
   <el-button @click="addTextClick" type="primary">
-    {{ '➖视频质量' }}
+    {{ '视频质量' }}
   </el-button>
 </template>

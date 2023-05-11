@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BottomItem: typeof import('./components/BottomItem.vue')['default']
+    ControlBtns: typeof import('./components/ControlBtns.vue')['default']
     ControlComponent: typeof import('./components/ControlComponent.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
@@ -39,5 +40,8 @@ declare module '@vue/runtime-core' {
     VideoListComponent: typeof import('./components/VideoListComponent.vue')['default']
     VideoLower: typeof import('./components/VideoLower.vue')['default']
     VideoSlice: typeof import('./components/VideoSlice.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

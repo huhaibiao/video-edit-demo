@@ -19,15 +19,16 @@ import {
   store,
   subtitleList
 } from '../store'
-import VideoAddImage from './VideoAddImage.vue'
-import VideoAddSubtitle from './VideoAddSubtitle.vue'
-import VideoAddText from './VideoAddText.vue'
+// import VideoAddImage from './VideoAddImage.vue'
+// import VideoAddSubtitle from './VideoAddSubtitle.vue'
+// import VideoAddText from './VideoAddText.vue'
 import VideoListComponent from './VideoListComponent.vue'
-import VideoAddFrame from './VideoAddFrame.vue'
+// import VideoAddFrame from './VideoAddFrame.vue'
 import { formatTime } from '../utils/string'
-import VideoLower from './VideoLower.vue'
-import VideoSlice from './VideoSlice.vue'
+// import VideoLower from './VideoLower.vue'
+// import VideoSlice from './VideoSlice.vue'
 import PostDialog from './PostDialog.vue'
+import ControlBtns from './ControlBtns.vue'
 
 const accept = ref('.mp4')
 const videoInput = ref<HTMLInputElement | null>(null)
@@ -107,14 +108,26 @@ const uploadVideo = async (event: any) => {
   videoInput.value!.value = ''
 
   //ffmpeg加载视频
-  await initVideo(file)
-  const fileName = `video${store.id++}`
-  const { url: coverUrl, videoInfo } = await getFirstFrame(url, fileName)
-  videoList[videoList.length - 1] = {
-    videoUrl: url,
-    coverUrl,
-    fileName,
-    videoInfo
+  try {
+    await initVideo(file)
+    const fileName = `video${store.id++}`
+    const { url: coverUrl, videoInfo } = await getFirstFrame(url, fileName)
+    videoList[videoList.length - 1] = {
+      videoUrl: url,
+      coverUrl,
+      fileName,
+      videoInfo
+    }
+  } catch (error) {
+    console.log('此视频：', error)
+    alert('此视频无法进行编辑，可以进行观看体验')
+    const url = URL.createObjectURL(new Blob([file], { type: 'video/mp4' }))
+    videoList[videoList.length - 1] = {
+      videoUrl: url
+      // coverUrl,
+      // fileName,
+      // videoInfo
+    }
   }
 }
 let video: HTMLVideoElement
@@ -185,28 +198,14 @@ const postVideo = async () => {
       >
     </div>
     <el-divider style="margin: 5px 0" />
-    <el-button @click="selectVideo" style="margin: 3px 0 3px 12px">
-      {{ '上传视频' }}
-    </el-button>
-    <el-button @click="upLoadFont"> {{ '上传字体' }} </el-button>
-    <el-button @click="upLoadImage"> {{ '上传贴图' }} </el-button>
-    <el-button @click="upLoadSubTitle"> {{ '上传字幕' }} </el-button>
-    <VideoLower></VideoLower>
-    <VideoSlice></VideoSlice>
-    <VideoAddFrame></VideoAddFrame>
-    <VideoAddText></VideoAddText>
-    <VideoAddImage></VideoAddImage>
-    <VideoAddSubtitle
-      style="margin-bottom: 3px; margin-top: 3px"
-    ></VideoAddSubtitle>
-
-    <el-button @click="downloadVideo" type="primary">
-      {{ '下载视频' }}
-    </el-button>
-    <el-button @click="postVideo" type="primary">
-      {{ '导出视频' }}
-    </el-button>
-
+    <ControlBtns
+      @download-video="downloadVideo"
+      @post-video="postVideo"
+      @select-video="selectVideo"
+      @up-load-font="upLoadFont"
+      @up-load-image="upLoadImage"
+      @up-load-sub-title="upLoadSubTitle"
+    ></ControlBtns>
     <PostDialog
       v-if="postDialog.show"
       :data="postDialog.data"
@@ -248,6 +247,7 @@ const postVideo = async () => {
   padding: 10px;
   overflow-y: auto;
 }
+
 .video-play {
   display: flex;
   align-items: center;

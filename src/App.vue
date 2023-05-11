@@ -8,6 +8,7 @@ import BottomItem from './components/BottomItem.vue'
 import ControlComponent from './components/ControlComponent.vue'
 import VideoComponent from './components/VideoComponent.vue'
 import {
+  ffmpegCoreLoaded,
   imageList,
   processData,
   subtitleList,
@@ -23,12 +24,12 @@ const frameList = computed(() => {
 </script>
 <template>
   <div class="app-title">
-    <h1>视频编辑器</h1>
+    <span>视频编辑器</span>
     <div class="progressContain">
       <div class="progress" :style="{ width: processData * 100 + '%' }"></div>
     </div>
   </div>
-  <div class="video-edit">
+  <div class="video-edit" v-loading="!ffmpegCoreLoaded">
     <div class="top">
       <!-- //上左-视频区域 -->
       <div class="top-left video">
@@ -129,13 +130,14 @@ const frameList = computed(() => {
 .app-title {
   padding: 0 20px;
   margin-top: 6px;
-  height: 30px;
-  overflow: hidden;
+  min-height: 30px;
+  overflow: auto;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  h1 {
+  flex-wrap: wrap;
+  span {
     background-size: auto 30px;
     text-align: left;
     overflow: hidden;
@@ -143,12 +145,14 @@ const frameList = computed(() => {
     text-overflow: ellipsis;
     display: block;
     font-size: 22px;
+    font-weight: 500;
     color: #333;
   }
   .progressContain {
     width: 500px;
     height: 6px;
     border-radius: 4px;
+    border: 0.5px rgba(37, 122, 219, 0.621) solid;
     background-color: white;
     overflow: hidden;
     .progress {

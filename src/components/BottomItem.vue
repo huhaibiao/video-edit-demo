@@ -24,7 +24,6 @@ const props = defineProps(['title', 'contentComponent', 'data'])
           :key="index"
           closable
           :disable-transitions="false"
-          @close=""
           style="margin: 0 10px"
         >
           {{ item }}</el-tag

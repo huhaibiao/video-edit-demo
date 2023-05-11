@@ -49,7 +49,7 @@ const confirm = () => {
 </script>
 
 <template>
-  <el-button @click="btnClick" type="primary" style="margin-right: 15px">
+  <el-button style="margin: 1px 6px" type="primary" @click="btnClick">
     {{ '添加贴图' }}
   </el-button>
 

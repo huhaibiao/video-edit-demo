@@ -55,9 +55,15 @@ const confirm = () => {
 </script>
 
 <template>
-  <el-button @click="btnClick" type="primary" style="margin-right: 15px">
+  <el-button
+    style="margin: 1px 6px"
+    @click="btnClick"
+    type="primary"
+    class="btn"
+  >
     {{ '添加文字' }}
   </el-button>
+
   <el-dialog v-model="dialogVisible" title="设置文字" width="50%">
     视频文字：<el-input v-model="textValue" placeholder="请输入视频文字" />
     文字时间：<el-slider
