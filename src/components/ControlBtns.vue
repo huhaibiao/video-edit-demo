@@ -9,6 +9,7 @@ import VideoAddText from './VideoAddText.vue'
 import VideoAddFrame from './VideoAddFrame.vue'
 import VideoLower from './VideoLower.vue'
 import VideoSlice from './VideoSlice.vue'
+import { btnsStatus } from '../store/ui-status'
 const emit = defineEmits([
   'selectVideo',
   'upLoadFont',
@@ -30,6 +31,13 @@ const emit = defineEmits([
     <VideoLower></VideoLower>
     <VideoSlice></VideoSlice>
     <VideoAddFrame></VideoAddFrame>
+    <el-button
+      style="margin: 1px 6px"
+      @click="btnsStatus.addText = true"
+      type="primary"
+    >
+      {{ '添加文字' }}
+    </el-button>
     <VideoAddText></VideoAddText>
     <VideoAddImage></VideoAddImage>
     <VideoAddSubtitle></VideoAddSubtitle>

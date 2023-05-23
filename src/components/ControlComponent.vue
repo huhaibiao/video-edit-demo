@@ -19,14 +19,8 @@ import {
   store,
   subtitleList
 } from '../store'
-// import VideoAddImage from './VideoAddImage.vue'
-// import VideoAddSubtitle from './VideoAddSubtitle.vue'
-// import VideoAddText from './VideoAddText.vue'
 import VideoListComponent from './VideoListComponent.vue'
-// import VideoAddFrame from './VideoAddFrame.vue'
 import { formatTime } from '../utils/string'
-// import VideoLower from './VideoLower.vue'
-// import VideoSlice from './VideoSlice.vue'
 import PostDialog from './PostDialog.vue'
 import ControlBtns from './ControlBtns.vue'
 

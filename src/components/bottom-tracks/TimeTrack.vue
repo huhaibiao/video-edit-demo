@@ -19,14 +19,16 @@ onMounted(() => {
 const scrubberLeft = ref('0')
 // 根据视频时间更新滑块位置
 function updateScrubber() {
-  const time = video.currentTime
-  videoList[videoSelected.value].currentSecond = Math.floor(video.currentTime)
-  const duration = video.duration
-  let position = (time / duration) * 100
-  if (time === 0) {
-    position = 0
-  }
-  scrubberLeft.value = `${position.toFixed(2)}%`
+  requestAnimationFrame(() => {
+    const time = video.currentTime
+    videoList[videoSelected.value].currentSecond = Math.floor(video.currentTime)
+    const duration = video.duration
+    let position = (time / duration) * 100
+    if (time === 0) {
+      position = 0
+    }
+    scrubberLeft.value = `${position.toFixed(2)}%`
+  })
 }
 
 // 鼠标点击底部区域更新视频时间
