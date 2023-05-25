@@ -3,7 +3,19 @@
  * @Date: 2023-04-21 22:11:20
 -->
 
-# 分支说明：
+# 其他项目推荐
+
+## ai chat
+体验地址：（欢迎友好提问哈，小服务器希望大家友好体验一下）
+http://18.216.251.165/ai-chat
+- 项目界面：
+![ai chat界面](./docs/images/01.jpeg)
+目前 账号：huhaibiao 密码是：1
+- 开源代码：
+前端：https://github.com/huhaibiao/aichat
+后端：https://github.com/huhaibiao/openai-api
+
+# 当前项目分支说明：
 - master:为正式分支，master会不定期合并dev分支
 - dev: 为开发分支，如果需要提交，请提交到该分支
 
@@ -130,3 +142,4 @@ ffmpeg -i input.mp4 -r 0.2 -vf "select=not(mod(n\,100)),scale=-1:240,tile=3x4" o
 
 超出会报： Error: File could not be read! Code=0
     at fileReader.onerror
+
