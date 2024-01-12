@@ -5,6 +5,9 @@
 
 # 其他项目推荐
 
+- ffmpeg/ffmpeg库官网：
+https://ffmpegwasm.netlify.app/docs/getting-started/examples
+
 ## ai chat
 体验地址：（欢迎友好提问哈，小服务器希望大家友好体验一下）
 http://18.216.251.165/ai-chat
@@ -40,6 +43,7 @@ http://18.216.251.165/ai-chat
 2. wasm + ffmpeg，这里采用这种
 
 # 安装 @ffmpeg/ffmpeg @ffmpeg/core包
+
 
 `pnpm install @ffmpeg/ffmpeg @ffmpeg/core`
 
@@ -137,9 +141,18 @@ ffmpeg -i input.mp4 -ss 00:00:05 -frames:v 10 output_%03d.jpg
 ffmpeg -i input.mp4 -r 0.2 -vf "select=not(mod(n\,100)),scale=-1:240,tile=3x4" output.jpg
 ```
 
-# 内存限制
+
+#issus
+## 内存限制
 2 GB，这是 WebAssembly 中的硬性限制
 
 超出会报： Error: File could not be read! Code=0
     at fileReader.onerror
 
+## shareArrayBuffer not defined的问题
+在部署的服务器上设置
+headers: {
+        'Cross-Origin-Opener-Policy': 'same-origin',
+        'Cross-Origin-Embedder-Policy': 'require-corp'
+      },
+https协议，浏览器才认可生效
